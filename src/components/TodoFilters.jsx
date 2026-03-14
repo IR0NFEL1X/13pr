@@ -1,40 +1,29 @@
 function TodoFilters({ filter, onFilterChange, activeCount }) {
+  const filters = [
+    { id: 'all', label: 'Все' },
+    { id: 'active', label: 'Активные' },
+    { id: 'completed', label: 'Готово' }
+  ];
+
   return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginBottom: '20px',
-      paddingBottom: '10px',
-      borderBottom: '2px solid #eee'
-    }}>
-      {/* Счетчик показывает количество невыполненных задач [cite: 327, 357] */}
-      <span>Осталось задач: {activeCount}</span>
-      
+    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '15px' }}>
+      <span>Осталось: {activeCount}</span>
       <div>
-        {['all', 'active', 'completed'].map((filterType) => (
-          <button
-            key={filterType}
-            onClick={() => onFilterChange(filterType)}
-            style={{
-              margin: '0 5px',
-              padding: '5px 10px',
-              // Кнопка активного фильтра выделяется синим цветом [cite: 340, 356]
-              background: filter === filterType ? '#007bff' : '#f0f0f0',
-              color: filter === filterType ? 'white' : '#333',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer'
+        {filters.map(f => (
+          <button 
+            key={f.id}
+            onClick={() => onFilterChange(f.id)}
+            style={{ 
+              marginLeft: '5px',
+              fontWeight: filter === f.id ? 'bold' : 'normal',
+              backgroundColor: filter === f.id ? '#ddd' : '#fff'
             }}
           >
-            {/* Текст кнопок в зависимости от типа фильтра [cite: 345, 346] */}
-            {filterType === 'all' ? 'Все' : 
-             filterType === 'active' ? 'Активные' : 'Выполненные'}
+            {f.label}
           </button>
         ))}
       </div>
     </div>
   );
 }
-
 export default TodoFilters;

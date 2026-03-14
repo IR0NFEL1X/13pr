@@ -1,27 +1,25 @@
-import { useState } from 'react';
-
-function TodoItem({ task, onToggle, onDelete, onEdit }) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [editText, setEditText] = useState(task.text);
-
-  const handleSave = () => {
-    onEdit(task.id, editText);
-    setIsEditing(false);
-  };
-
+function TodoItem({ task, onToggle, onDelete }) {
   return (
-    <li className={`todo-item ${task.completed ? 'done' : ''}`} style={{ display: 'flex', gap: '10px', padding: '10px' }}>
-      <input type="checkbox" checked={task.completed} onChange={() => onToggle(task.id)} />
-      
-      {isEditing ? (
-        <input value={editText} onChange={(e) => setEditText(e.target.value)} onBlur={handleSave} autoFocus />
-      ) : (
-        <span onDoubleClick={() => setIsEditing(true)} style={{ textDecoration: task.completed ? 'line-through' : 'none', flex: 1 }}>
-          {task.text}
-        </span>
-      )}
-      
-      <button onClick={() => onDelete(task.id)} style={{ background: 'red', color: 'white' }}>Удалить</button>
+    <li style={{ 
+      display: 'flex', 
+      alignItems: 'center', 
+      gap: '10px', 
+      padding: '10px', 
+      borderBottom: '1px solid #eee' 
+    }}>
+      <input 
+        type="checkbox" 
+        checked={task.completed} 
+        onChange={() => onToggle(task.id)} 
+      />
+      <span style={{ 
+        flex: 1, 
+        textDecoration: task.completed ? 'line-through' : 'none',
+        color: task.completed ? '#888' : '#000'
+      }}>
+        {task.text}
+      </span>
+      <button onClick={() => onDelete(task.id)} style={{ color: 'red' }}>Удалить</button>
     </li>
   );
 }
