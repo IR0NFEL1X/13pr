@@ -12,10 +12,15 @@ function AddTodoForm({ onAdd }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginBottom: '20px' }}>
-      <input value={text} onChange={(e) => setText(e.target.value)} placeholder="Что нужно сделать?" />
+    <form onSubmit={handleSubmit} className="add-form">
+      <input 
+        value={text} 
+        onChange={(e) => setText(e.target.value)} 
+        placeholder="Добавить новую задачу..." 
+      />
       <button type="submit">Добавить</button>
     </form>
   );
 }
+
 export default AddTodoForm;

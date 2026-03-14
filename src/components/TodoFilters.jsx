@@ -6,18 +6,14 @@ function TodoFilters({ filter, onFilterChange, activeCount }) {
   ];
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '15px' }}>
-      <span>Осталось: {activeCount}</span>
-      <div>
+    <div className="filters-container">
+      <span className="count">Осталось: {activeCount}</span>
+      <div className="filter-buttons">
         {filters.map(f => (
           <button 
             key={f.id}
+            className={filter === f.id ? 'filter-btn active' : 'filter-btn'}
             onClick={() => onFilterChange(f.id)}
-            style={{ 
-              marginLeft: '5px',
-              fontWeight: filter === f.id ? 'bold' : 'normal',
-              backgroundColor: filter === f.id ? '#ddd' : '#fff'
-            }}
           >
             {f.label}
           </button>
@@ -26,4 +22,5 @@ function TodoFilters({ filter, onFilterChange, activeCount }) {
     </div>
   );
 }
+
 export default TodoFilters;

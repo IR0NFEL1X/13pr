@@ -1,26 +1,42 @@
-function TodoItem({ task, onToggle, onDelete }) {
+import { useState } from 'react';
+
+function TodoItem({ task, onToggle, onDelete, onEdit }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editText, setEditText] = useState(task.text);
+
+  const handleSave = () => {
+    if (editText.trim()) {
+      onEdit(task.id, editText.trim());
+      setIsEditing(false);
+    }
+  };
+
   return (
-    <li style={{ 
-      display: 'flex', 
-      alignItems: 'center', 
-      gap: '10px', 
-      padding: '10px', 
-      borderBottom: '1px solid #eee' 
-    }}>
+    <li className={`todo-item ${task.completed ? 'completed' : ''}`}>
       <input 
         type="checkbox" 
         checked={task.completed} 
         onChange={() => onToggle(task.id)} 
       />
-      <span style={{ 
-        flex: 1, 
-        textDecoration: task.completed ? 'line-through' : 'none',
-        color: task.completed ? '#888' : '#000'
-      }}>
-        {task.text}
-      </span>
-      <button onClick={() => onDelete(task.id)} style={{ color: 'red' }}>Удалить</button>
+      
+      {isEditing ? (
+        <input 
+          className="edit-input"
+          value={editText} 
+          onChange={(e) => setEditText(e.target.value)} 
+          onBlur={handleSave}
+          onKeyDown={(e) => e.key === 'Enter' && handleSave()}
+          autoFocus 
+        />
+      ) : (
+        <span onDoubleClick={() => setIsEditing(true)} className="task-text">
+          {task.text}
+        </span>
+      )}
+
+      <button onClick={() => onDelete(task.id)} className="delete-btn">❌</button>
     </li>
   );
 }
+
 export default TodoItem;
