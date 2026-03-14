@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import AddTodoForm from 'src/components/AddTodoForm';
 import TodoItem from 'src/components/TodoItem';
+import TodoFilters from 'src/components/TodoFilters';
 
 function App() {
   const [todos, setTodos] = useState(() => {
