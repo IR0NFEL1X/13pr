@@ -1,5 +1,6 @@
 {
   "name": "13pr",
+  "homepage": "https://ir0nfel1x.github.io/13pr/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -12,7 +13,6 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
-  "homepage": "https://ir0nfel1x.github.io/13pr/",
   "dependencies": {
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
